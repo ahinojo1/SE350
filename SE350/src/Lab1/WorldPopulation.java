@@ -16,6 +16,7 @@ public class WorldPopulation {
 	public WorldPopulation(){
 		sortStrategy = new #; // Set the default strategy here.	
 	}
+
 	
 	public void readInputFile(){
 		population = readPopulationFile("src\\WorldPopulation.csv");
@@ -28,7 +29,8 @@ public class WorldPopulation {
 	// Lab Exercise:  Read in the WorldPopulation.csv
 	// Extract ONLY the numbers and store them into population[]
 	public long[] readPopulationFile(String fileName){
-	  
+		
+		StringTokenizer tokenizer = new StringTokenizer(fileName, ",");
 		return population;
 	}
 	
