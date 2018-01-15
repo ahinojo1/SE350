@@ -14,7 +14,7 @@ public class WorldPopulation {
 		
 	// Lab Exercise:  After creating some strategy classes -- set the default strategy here.
 	public WorldPopulation(){
-		sortStrategy = new #; // Set the default strategy here.	
+		sortStrategy = new BubbleSort(); // Set the default strategy here.	
 	}
 
 	
@@ -31,6 +31,7 @@ public class WorldPopulation {
 	public long[] readPopulationFile(String fileName){
 		
 		StringTokenizer tokenizer = new StringTokenizer(fileName, ",");
+		//??I think we add tokenized numbers into the array called population
 		return population;
 	}
 	
