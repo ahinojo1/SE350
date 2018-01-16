@@ -2,8 +2,10 @@ package Lab1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 
@@ -19,7 +21,7 @@ public class WorldPopulation {
 
 	
 	public void readInputFile(){
-		population = readPopulationFile("src\\WorldPopulation.csv");
+		population = readPopulationFile("F:/GitHub/SE350/SE350/src/Lab1/WorldPopulation.csv");
 	}
 	
 	public void setStrategy(SortStrategy strategy){
@@ -30,7 +32,33 @@ public class WorldPopulation {
 	// Extract ONLY the numbers and store them into population[]
 	public long[] readPopulationFile(String fileName){
 		
-		StringTokenizer tokenizer = new StringTokenizer(fileName, ",");
+		try {
+			FileReader inputFile = new FileReader(fileName);
+			BufferedReader reader = new BufferedReader(inputFile);
+			String line;
+			while((line = reader.readLine()) != null) {
+				StringTokenizer tokenizer = new StringTokenizer(line, ",");
+				String regionCell = tokenizer.nextToken();
+				String yearCell = tokenizer.nextToken();
+				Long populationCell = (long) Integer.parseInt(tokenizer.nextToken()); 
+				
+				for (int i = 0; i < population.length - 1; i++) {
+					population[i] = populationCell;
+				}
+			}
+				
+			reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//??I think we add tokenized numbers into the array called population
 		return population;
 	}
@@ -38,7 +66,7 @@ public class WorldPopulation {
 	// Lab Exercise.  Complete this method.
 	// Delegate sorting to the strategy object
 	public void sortPopulation(){		
-		
+		sortStrategy.sort(population);
 	}
 	
 	public void computeTotalPopulation(){
@@ -50,8 +78,10 @@ public class WorldPopulation {
 	public static void main(String[] args) {
 		WorldPopulation worldPopulation = new WorldPopulation();
 		worldPopulation.readInputFile();
-		worldPopulation.setStrategy(#); //  Currently no strategies.
-		worldPopulation.sortPopulation();	
+		worldPopulation.setStrategy(new InsertionSort()); //  Currently no strategies.
+		worldPopulation.sortPopulation();
+		worldPopulation.setStrategy(new SelectionSort());
+		worldPopulation.sortPopulation();
 	}
 
 }

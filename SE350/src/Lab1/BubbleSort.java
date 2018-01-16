@@ -1,25 +1,16 @@
 package Lab1;
 
 public class BubbleSort implements SortStrategy {
-	public void sort() {
-		// TODO Auto-generated method stub
-		
+	public void sort(long[] ar) {
+		for (int i=1; i < ar.length; i++)
+		   {
+		      long index = ar[i]; int j = i;
+		      while (j > 0 && ar[j-1] > index)
+		      {
+		           ar[j] = ar[j-1];
+		           j--;
+		      }
+		      ar[j] = index;
+		   }
 	}
-	
-	void bubbleSort(int ar[])
-	{
-	   for (int i = (ar.length - 1); i >= 0; i--)
-	   {
-	      for (int j = 1; j <= i; j++)	// j ? i
-	      {
-	         if (ar[j-1] > ar[j])
-	         {
-	              int temp = ar[j-1];
-	              ar[j-1] = ar[j];
-	              ar[j] = temp;
-	         } 
-	       } 
-	    } 
-	}
-
 }
