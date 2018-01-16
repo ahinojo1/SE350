@@ -21,7 +21,7 @@ public class WorldPopulation {
 
 	
 	public void readInputFile(){
-		population = readPopulationFile("F:/GitHub/SE350/SE350/src/Lab1/WorldPopulation.csv");
+		population = readPopulationFile("/src/Lab1/WorldPopulation.csv");
 	}
 	
 	public void setStrategy(SortStrategy strategy){
