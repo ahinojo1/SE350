@@ -38,12 +38,14 @@ public class WorldPopulation {
 			String line;
 			while((line = reader.readLine()) != null) {
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
-				String regionCell = tokenizer.nextToken();
-				String yearCell = tokenizer.nextToken();
-				Long populationCell = (long) Integer.parseInt(tokenizer.nextToken()); 
+				 
 				
 				for (int i = 0; i < population.length - 1; i++) {
+					String regionCell = tokenizer.nextToken();
+					String yearCell = tokenizer.nextToken();
+					Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
 					population[i] = populationCell;
+					//System.out.println(population[i]); //testing
 				}
 			}
 				
