@@ -8,11 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
+import java.util.ArrayList;
 
 public class WorldPopulation {
 
 	SortStrategy sortStrategy;
-	long[] population = new long[13484]; // Cheating because we know number of records!!
+	ArrayList<Long> population = new ArrayList<Long>();//[13484]; // Cheating because we know number of records!!
 		
 	// Lab Exercise:  After creating some strategy classes -- set the default strategy here.
 	public WorldPopulation(){
@@ -30,7 +31,7 @@ public class WorldPopulation {
 	
 	// Lab Exercise:  Read in the WorldPopulation.csv
 	// Extract ONLY the numbers and store them into population[]
-	public long[] readPopulationFile(String fileName){
+	public ArrayList<Long> readPopulationFile(String fileName){ //changed return type from long[] ArrayList<Long>
 		
 		try {
 			FileReader inputFile = new FileReader(fileName);
@@ -40,15 +41,12 @@ public class WorldPopulation {
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
 				 System.out.println(line);
 				
-				//for (int i = 0; i < population.length - 1; i++) {
-					String regionCell = tokenizer.nextToken();
-					String yearCell = tokenizer.nextToken();
-					Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
-					population.add(populationCell) ;
-					//System.out.println(population[i]); //testing
-				}
-			//}
-				
+				tokenizer.nextToken();
+				tokenizer.nextToken();
+				Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
+				population.add(populationCell);
+				//System.out.println(population[i]); //testing
+			}
 			reader.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
