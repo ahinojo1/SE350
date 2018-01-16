@@ -21,7 +21,7 @@ public class WorldPopulation {
 
 	
 	public void readInputFile(){
-		population = readPopulationFile("/src/Lab1/WorldPopulation.csv");
+		population = readPopulationFile("src\\Lab1\\WorldPopulation.csv");
 	}
 	
 	public void setStrategy(SortStrategy strategy){
@@ -38,16 +38,16 @@ public class WorldPopulation {
 			String line;
 			while((line = reader.readLine()) != null) {
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
-				 
+				 System.out.println(line);
 				
-				for (int i = 0; i < population.length - 1; i++) {
+				//for (int i = 0; i < population.length - 1; i++) {
 					String regionCell = tokenizer.nextToken();
 					String yearCell = tokenizer.nextToken();
 					Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
-					population[i] = populationCell;
+					population.add(populationCell) ;
 					//System.out.println(population[i]); //testing
 				}
-			}
+			//}
 				
 			reader.close();
 		} catch (FileNotFoundException e) {
