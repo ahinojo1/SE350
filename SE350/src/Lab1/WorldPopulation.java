@@ -41,7 +41,7 @@ public class WorldPopulation {
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
 				 System.out.println(line);
 				
-				tokenizer.nextToken();
+				tokenizer.nextToken(); //removed assignments: no need to store as string variables
 				tokenizer.nextToken();
 				Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
 				population.add(populationCell);
