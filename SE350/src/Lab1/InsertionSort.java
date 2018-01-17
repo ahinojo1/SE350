@@ -1,7 +1,7 @@
 package Lab1;
 
 public class InsertionSort implements SortStrategy {
-	public void sort(long[] ar) {
+	public void sort(Long[] ar) {
 		for (int i=1; i < ar.length; i++)
 		   {
 		      long index = ar[i]; int j = i;

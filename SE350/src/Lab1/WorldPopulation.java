@@ -10,10 +10,12 @@ import java.io.Reader;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class WorldPopulation {
 
 	SortStrategy sortStrategy;
 	ArrayList<Long> population = new ArrayList<Long>();//[13484]; // Cheating because we know number of records!!
+	Long[] popArray = new Long[13484];
 		
 	// Lab Exercise:  After creating some strategy classes -- set the default strategy here.
 	public WorldPopulation(){
@@ -22,7 +24,7 @@ public class WorldPopulation {
 
 	
 	public void readInputFile(){
-		population = readPopulationFile("src\\Lab1\\WorldPopulation.csv");
+		population = readPopulationFile("C:\\Users\\Antonio\\Documents\\WorldPopulation.csv");
 	}
 	
 	public void setStrategy(SortStrategy strategy){
@@ -39,15 +41,16 @@ public class WorldPopulation {
 			String line;
 			while((line = reader.readLine()) != null) {
 				StringTokenizer tokenizer = new StringTokenizer(line, ",");
-				 System.out.println(line);
+				 //System.out.println(line);
 				
 				tokenizer.nextToken(); //removed assignments: no need to store as string variables
 				tokenizer.nextToken();
-				Long populationCell = (long) Integer.parseInt(tokenizer.nextToken());
+				Long populationCell = Long.parseLong(tokenizer.nextToken());
 				population.add(populationCell);
 				//System.out.println(population[i]); //testing
 			}
 			reader.close();
+			popArray = population.toArray(new Long[population.size()]);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +69,7 @@ public class WorldPopulation {
 	// Lab Exercise.  Complete this method.
 	// Delegate sorting to the strategy object
 	public void sortPopulation(){		
-		sortStrategy.sort(population);
+		sortStrategy.sort(popArray);
 	}
 	
 	public void computeTotalPopulation(){
@@ -80,6 +83,7 @@ public class WorldPopulation {
 		worldPopulation.readInputFile();
 		worldPopulation.setStrategy(new InsertionSort()); //  Currently no strategies.
 		worldPopulation.sortPopulation();
+		worldPopulation.readInputFile();
 		worldPopulation.setStrategy(new SelectionSort());
 		worldPopulation.sortPopulation();
 	}
