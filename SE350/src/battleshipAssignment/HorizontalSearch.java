@@ -8,4 +8,16 @@ public class HorizontalSearch implements BattleSearchStrategy {
 		
 	}
 
+	@Override
+	public String searchName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int numCellsVisited() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
