@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Battleship {
 	BattleSearchStrategy SearchStrategy;
 	public static  String fileName = "C:\\Users\\Antonio\\SE350\\SE350\\src\\battleshipAssignment\\input.txt";
-	private int gridDimension = 25;
-	public boolean[][] grid = new boolean[gridDimension][gridDimension];
+	public static int gridDimension = 25;
+	public boolean[][] shipGrid = new boolean[gridDimension][gridDimension];
 	public Battleship() {
 		SearchStrategy = new HorizontalSearch();
 	}
@@ -27,6 +27,9 @@ public class Battleship {
 	}
 	public void setGridDimension(int dimension) {
 		gridDimension = dimension;
+	}
+	public static int getGridDimension() {
+		return gridDimension;
 	}
 	
 	public void readInputFile() {
@@ -55,8 +58,13 @@ public class Battleship {
 		}
 	}
 	
+	public void doSearch() {
+		SearchStrategy.search(shipGrid);
+	}
+	
 	public void playGame() {
-		
+		readInputFile();
+		doSearch();
 		
 	}
 	public static void main(String[] args) {
@@ -65,6 +73,5 @@ public class Battleship {
 		//choose strategy to search for ships (i.e. horizontal, random, special)
 		Battleship battleship = new Battleship();
 		battleship.playGame();
-		battleship.readInputFile();
 	}
 }

@@ -3,11 +3,11 @@ package battleshipAssignment;
 public class RandomSearch implements BattleSearchStrategy {
 
 	@Override
-	public void search() {
+	public void search(boolean[][] grid) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public String searchName() {
 		// TODO Auto-generated method stub
@@ -19,5 +19,7 @@ public class RandomSearch implements BattleSearchStrategy {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }
