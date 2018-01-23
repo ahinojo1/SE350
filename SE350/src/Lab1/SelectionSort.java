@@ -12,4 +12,10 @@ public class SelectionSort implements SortStrategy{
 		      ar[min] = temp;
 		   } 
 	}
+
+	@Override
+	public long getSortTime() {
+		// TODO Auto-generated method stub
+		return System.currentTimeMillis();
+	}
 }
