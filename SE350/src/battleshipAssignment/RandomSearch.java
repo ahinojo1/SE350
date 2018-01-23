@@ -11,7 +11,7 @@ public class RandomSearch implements BattleSearchStrategy {
 	@Override
 	public String searchName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Random Search";
 	}
 
 	@Override
