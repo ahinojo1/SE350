@@ -2,6 +2,7 @@ package battleshipAssignment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,12 +10,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Battleship {
 	BattleSearchStrategy SearchStrategy;
 	public static  String fileName = "C:\\Users\\Antonio\\SE350\\SE350\\src\\battleshipAssignment\\input.txt";
 	public static int gridDimension = 25;
-	public boolean[][] shipGrid = new boolean[gridDimension][gridDimension];
+	public boolean[][] grid = new boolean[gridDimension][gridDimension];
+	ArrayList<int[]> shipPoints = new ArrayList<int[]>();
+	
 	public Battleship() {
 		SearchStrategy = new HorizontalSearch();
 	}
@@ -22,6 +26,7 @@ public class Battleship {
 	public void setStrategy(BattleSearchStrategy searchStrategy) {
 		SearchStrategy = searchStrategy;
 	}
+	
 	public void setInputFile(String newFileName) {
 		fileName = newFileName;
 	}
@@ -34,7 +39,7 @@ public class Battleship {
 	
 	public void readInputFile() {
 		try {
-			FileReader file = new FileReader(fileName);
+			FileReader file = new FileReader(new File(fileName));
 			BufferedReader reader = new BufferedReader(file);
 			String line;
 			while((line = reader.readLine()) != null) {
@@ -43,7 +48,7 @@ public class Battleship {
 				System.out.println(x);
 				String y = tokenizer.nextToken();
 				System.out.println(y);
-				//tokenizer.nextToken();
+				tokenizer.nextToken();
 				//System.out.println(line);
 				//tokenizer.nextToken();
 				//System.out.println(line);
@@ -57,13 +62,37 @@ public class Battleship {
 			e.printStackTrace();
 		}
 	}
-	
+	public void readInputFile2() {
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File(fileName));
+			while (scanner.hasNextLine()) {
+				String r = scanner.nextLine();
+				System.out.println(r);
+				String regex = "\\(|\\)";
+				String[] result = r.split(regex);
+				
+				for(String str:result) {
+					//
+					//Should I do another split by comma and change to True for each coordinate?
+					//Integer strInt = Integer.parseInt(str);
+					System.out.println(str);
+					//shipPoints.add(strInt);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	public void doSearch() {
-		SearchStrategy.search(shipGrid);
+		SearchStrategy.search(grid);
 	}
 	
 	public void playGame() {
-		readInputFile();
+		readInputFile2();
 		doSearch();
 		
 	}

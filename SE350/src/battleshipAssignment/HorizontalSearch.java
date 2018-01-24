@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
 import java.util.ArrayList;
-
+//Due 29
 public class HorizontalSearch implements BattleSearchStrategy {
 	private int numCellsVisited = 0;
 	
