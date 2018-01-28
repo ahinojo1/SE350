@@ -3,6 +3,7 @@ package battleshipAssignment;
 //Due 29
 public class HorizontalSearch implements BattleSearchStrategy {
 	private int numCellsVisited = 0;
+	private int numCellsFound = 0;
 	
 	@Override
 	public void search(boolean[][] grid) {
@@ -12,9 +13,15 @@ public class HorizontalSearch implements BattleSearchStrategy {
 			for (int y = 0 ; y < length; y++) {
 				if (grid[x][y]) {
 					System.out.println("Ship found at (" + x + ", " + y + ")");
-					numCellsVisited++;
-					//What am I checking??
+					numCellsFound++;
 				}
+				numCellsVisited++;
+				if(numCellsFound >= 8) {
+					break;
+				}
+			}
+			if(numCellsFound >= 8) {
+				break;
 			}
 		}
 	}
