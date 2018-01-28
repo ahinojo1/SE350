@@ -1,14 +1,5 @@
 package battleshipAssignment;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.util.StringTokenizer;
-import java.util.ArrayList;
 //Due 29
 public class HorizontalSearch implements BattleSearchStrategy {
 	private int numCellsVisited = 0;
@@ -20,6 +11,8 @@ public class HorizontalSearch implements BattleSearchStrategy {
 		for (int x = 0; x < length; x++) {
 			for (int y = 0 ; y < length; y++) {
 				if (grid[x][y]) {
+					System.out.println("Ship found at (" + x + ", " + y + ")");
+					numCellsVisited++;
 					//What am I checking??
 				}
 			}

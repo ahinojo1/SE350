@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,6 +77,7 @@ public class Battleship {
 					//
 					//Should I do another split by comma and change to True for each coordinate?
 					//Integer strInt = Integer.parseInt(str);
+					
 					System.out.println(str);
 					//shipPoints.add(strInt);
 				}
@@ -86,13 +89,39 @@ public class Battleship {
 		
 		
 	}
+	
+	public void readInputFile3() {
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File(fileName));
+			while(scanner.hasNextLine()) {
+				String record = scanner.nextLine();
+				String regex = "\\(([0-9]+),([0-9]+)\\)";
+				Pattern p = Pattern.compile(regex);
+				Matcher matcher = p.matcher(record);
+				while(matcher.find()) {
+					int x = Integer.parseInt(matcher.group(1));
+					int y = Integer.parseInt(matcher.group(2));
+					//System.out.println("x = " + x + ", y = " + y);
+					grid[x][y] = true;
+					
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public void doSearch() {
 		SearchStrategy.search(grid);
+		System.out.println(SearchStrategy.searchName() + " visited " + SearchStrategy.numCellsVisited() + " number of cells");
 	}
 	
 	public void playGame() {
-		readInputFile2();
+		readInputFile3();
 		doSearch();
+		
 		
 	}
 	public static void main(String[] args) {
