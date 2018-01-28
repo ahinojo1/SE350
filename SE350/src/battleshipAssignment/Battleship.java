@@ -68,7 +68,6 @@ public class Battleship {
 			scanner = new Scanner(new File(fileName));
 			while (scanner.hasNextLine()) {
 				String r = scanner.nextLine();
-				System.out.println(r);
 				String regex = "\\(|\\)";
 				String[] result = r.split(regex);
 				
