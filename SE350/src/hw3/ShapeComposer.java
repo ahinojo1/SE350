@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -19,11 +20,15 @@ public class ShapeComposer extends Application{
 	Point2D clickPoint = null;
 	Point2D releasePoint = null;
 	Point2D lastPosition = null;
+	boolean inDragMode;
 	
-	ArrayList<MyShape> container = new ArrayList<MyShape>();
+	ArrayList<MyShape> shapes = new ArrayList<MyShape>();
 	
-	MyShape component;
+	MyShape currentShape;
 	
+	private MyShape getCurrentShape() { // IDK???
+		return null;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 			launch(args);
@@ -39,6 +44,7 @@ public class ShapeComposer extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		
 		EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
 
 			@Override
@@ -47,21 +53,46 @@ public class ShapeComposer extends Application{
 				 clickPoint = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 				 releasePoint = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 				 String eventName = mouseEvent.getEventType().getName();
-				 
+				 if(!inDragMode) {
+					 currentShape = getCurrentShape();
+				 }
 				 
 				 switch(eventName) {
 				 case("MOUSE_DRAGGED"):
-					 if(lastPosition != null) {
+					 inDragMode = true;
+					 if(currentShape != null && lastPosition != null) {
 						 double deltaX = clickPoint.getX() - lastPosition.getX();
 						 double deltaY = clickPoint.getX() - lastPosition.getY();
-						 component.move(deltaX, deltaY);
+						 currentShape.move(deltaX, deltaY);
 					 }
+					 break;
 				 case("MOUSE_RELEASED"):
-					
-					for(MyShape shape : container) {
-						//root.getChildren().add(new CircObject(clickPoint.getX(),clickPoint.getY()));
+					if(currentShape != null && currentShape instanceof CircObject) {
+						for(MyShape container : shapes) {
+							if(container instanceof RectObject /*&& container.ContainsPoint(clickPoint)*/) {
+								((RectObject)container).add(currentShape);
+								break;
+							}
+							 //root.getChildren().add(new CircObject(clickPoint.getX(),clickPoint.getY()));
+						}
 					}
-				 break;
+				 	if(currentShape == null) {
+				 		if(mouseEvent.getButton() == MouseButton.PRIMARY) {
+				 			CircObject circle = new CircObject(clickPoint);
+				 			shapes.add(circle);
+				 			root.getChildren().add(circle.getCircle());
+				 		}else {
+				 			RectObject rect = new RectObject(clickPoint);
+				 			shapes.add(rect);
+				 			root.getChildren().add(rect.getRectangle());
+				 		}
+				 	}
+				 	else {
+				 		currentShape = null;
+				 	}
+				 	inDragMode = false;
+				 	break;
+					 
 				 }
 				 lastPosition = clickPoint;
 				 
